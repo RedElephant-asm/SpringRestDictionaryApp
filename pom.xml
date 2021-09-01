@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.SpringRestDictionaryApp</groupId>
+    <artifactId>SpringRestDictionaryApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+
+        <!--
+        Пользовательские переменные окружения
+        !-->
+        <spring.version>5.3.9</spring.version>
+        <spring.groupId>org.springframework</spring.groupId>
+
+        <simpleEncodings.path>C:\Users\ksavchenko\Documents\Projects\Java\SimpleEncodings\production\SimpleEncodings.jar</simpleEncodings.path>
+        <simpleEncodings.version>1.0</simpleEncodings.version>
+        <simpleEncodings.groupId>org.SimpleEncodings</simpleEncodings.groupId>
+
+        <simpleDictionaryService.path>C:\Users\ksavchenko\Documents\Projects\Java\SimpleDictionaryService\production\SimpleDictionaryService.jar</simpleDictionaryService.path>
+        <simpleDictionaryService.version>1.0</simpleDictionaryService.version>
+        <simpleDictionaryService.groupId>org.SimpleDictionaryService</simpleDictionaryService.groupId>
+
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>${spring.groupId}</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${spring.groupId}</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${spring.groupId}</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${spring.groupId}</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${simpleEncodings.groupId}</groupId>
+            <artifactId>SimpleEncodings</artifactId>
+            <version>${simpleEncodings.version}</version>
+            <scope>system</scope>
+            <systemPath>${simpleEncodings.path}</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>${simpleDictionaryService.groupId}</groupId>
+            <artifactId>SimpleDictionaryService</artifactId>
+            <version>${simpleDictionaryService.version}</version>
+            <scope>system</scope>
+            <systemPath>${simpleDictionaryService.path}</systemPath>
+        </dependency>
+
+    </dependencies>
+
+</project>
