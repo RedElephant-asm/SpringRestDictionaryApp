@@ -2,6 +2,7 @@ package org.SpringRestDictionaryApp.appConfig;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * @author Savchenko Kirill
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * Класс является контейнером для конфигурации Spring.
  */
 @Configuration
+@EnableWebMvc
 @ComponentScan("org.SpringRestDictionaryApp")
 public class SpringMainConfiguration {
 }

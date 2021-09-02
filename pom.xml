@@ -26,6 +26,8 @@
         <simpleDictionaryService.version>1.0</simpleDictionaryService.version>
         <simpleDictionaryService.groupId>org.SimpleDictionaryService</simpleDictionaryService.groupId>
 
+        <javax.servlet>3.0.1</javax.servlet>
+
     </properties>
 
     <dependencies>
@@ -55,21 +57,43 @@
         </dependency>
 
         <dependency>
-            <groupId>${simpleEncodings.groupId}</groupId>
-            <artifactId>SimpleEncodings</artifactId>
-            <version>${simpleEncodings.version}</version>
-            <scope>system</scope>
-            <systemPath>${simpleEncodings.path}</systemPath>
+            <groupId>${spring.groupId}</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>${simpleDictionaryService.groupId}</groupId>
-            <artifactId>SimpleDictionaryService</artifactId>
-            <version>${simpleDictionaryService.version}</version>
-            <scope>system</scope>
-            <systemPath>${simpleDictionaryService.path}</systemPath>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet}</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
+
+    <build>
+
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
 
 </project>
