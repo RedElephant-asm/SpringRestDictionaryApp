@@ -10,6 +10,6 @@ public class HomeController {
 
     @GetMapping(value = "/index", produces = MediaType.TEXT_HTML_VALUE)
     public String greeting(){
-        return "Hello from home controller!";
+        return "index";
     }
 }

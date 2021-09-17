@@ -10,12 +10,16 @@ import javax.persistence.Table;
 @Table(schema = "dictionaryrest", name = "Dictionaries")
 public class Dictionary extends MainModel {
 
-    @Column(name = "name")
+    @Column(name = "description")
     private String description;
 
     public Dictionary(int id, String description) {
         super(id);
         this.description = description;
+    }
+
+    public Dictionary(){
+
     }
 
     public String getName() {

@@ -1,9 +1,11 @@
 package org.SpringRestDictionaryApp.applicationConfiguration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -23,9 +25,12 @@ import java.util.Properties;
 @PropertySources({
         @PropertySource("classpath:application.properties"),
         @PropertySource("classpath:hibernate/main.properties"),
-        @PropertySource("classpath:postgresql/main.properties")
+        @PropertySource("classpath:jpa/main.properties")
 })
 public class SpringDataConfiguration {
+
+    @Autowired
+    private Environment environment;
 
     /*
          Конфигурация EntityManagerFactory
@@ -34,7 +39,7 @@ public class SpringDataConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean mainEntityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         mainEntityManagerFactory.setDataSource(mainDataSource());
-        mainEntityManagerFactory.setPackagesToScan(new String[]{"org.SpringRestDictionaryApp.ORMModels"});
+        mainEntityManagerFactory.setPackagesToScan(new String[]{environment.getProperty("ORM.entities.directory")});
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         mainEntityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         mainEntityManagerFactory.setJpaProperties(additionalProperties());
@@ -48,10 +53,10 @@ public class SpringDataConfiguration {
     public DataSource mainDataSource(){
         DriverManagerDataSource mainDataSource = new DriverManagerDataSource();
 
-        mainDataSource.setDriverClassName("org.postgresql.Driver");
-        mainDataSource.setUsername("dictionarydbmain");
-        mainDataSource.setPassword("dictionarymainpassword");
-        mainDataSource.setUrl("jdbc:postgresql://localhost:5432/dictionarydb");
+        mainDataSource.setDriverClassName(environment.getProperty("jpaDriverClassName"));
+        mainDataSource.setUsername(environment.getProperty("jpaUsername"));
+        mainDataSource.setPassword(environment.getProperty("jpaPassword"));
+        mainDataSource.setUrl(environment.getProperty("jpaUrl"));
 
         return mainDataSource;
     }
@@ -72,8 +77,8 @@ public class SpringDataConfiguration {
     public Properties additionalProperties(){
         Properties properties = new Properties();
 
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+        properties.setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
 
         return properties;
     }
