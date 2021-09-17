@@ -1,0 +1,4 @@
+Operating system username:
+pgAdminMainUser
+System user password:
+pgAdminMainUserPassword
