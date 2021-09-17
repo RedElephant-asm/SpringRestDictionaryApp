@@ -7,6 +7,7 @@
     <groupId>org.SpringRestDictionaryApp</groupId>
     <artifactId>SpringRestDictionaryApp</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -15,19 +16,16 @@
         <!--
         Пользовательские переменные окружения
         !-->
+        <project.scriptdir>${project.basedir}/scripts</project.scriptdir>
+
         <spring.version>5.3.9</spring.version>
         <spring.groupId>org.springframework</spring.groupId>
 
-        <simpleEncodings.path>C:\Users\ksavchenko\Documents\Projects\Java\SimpleEncodings\production\SimpleEncodings.jar</simpleEncodings.path>
-        <simpleEncodings.version>1.0</simpleEncodings.version>
-        <simpleEncodings.groupId>org.SimpleEncodings</simpleEncodings.groupId>
+        <javax.servlet.version>3.0.1</javax.servlet.version>
+        <javax.servlet.groupId>javax.servlet</javax.servlet.groupId>
 
-        <simpleDictionaryService.path>C:\Users\ksavchenko\Documents\Projects\Java\SimpleDictionaryService\production\SimpleDictionaryService.jar</simpleDictionaryService.path>
-        <simpleDictionaryService.version>1.0</simpleDictionaryService.version>
-        <simpleDictionaryService.groupId>org.SimpleDictionaryService</simpleDictionaryService.groupId>
-
-        <javax.servlet>3.0.1</javax.servlet>
-
+        <hibernate.groupId>org.hibernate</hibernate.groupId>
+        <hibernate.version>5.5.7.Final</hibernate.version>
     </properties>
 
     <dependencies>
@@ -63,10 +61,40 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
+            <groupId>${javax.servlet.groupId}</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet}</version>
+            <version>${javax.servlet.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>${hibernate.groupId}</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.5.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.23</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
         </dependency>
 
     </dependencies>
@@ -81,6 +109,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+                <version>3.8.1</version>
             </plugin>
 
             <plugin>

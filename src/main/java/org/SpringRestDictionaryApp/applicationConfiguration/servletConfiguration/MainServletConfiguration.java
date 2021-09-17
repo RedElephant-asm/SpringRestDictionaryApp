@@ -5,22 +5,44 @@ import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-public class DispatcherServletConfiguration implements WebApplicationInitializer {
+public class MainServletConfiguration implements WebApplicationInitializer {
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        // Create the 'root' Spring application context
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(SpringMainConfiguration.class);
-        servletContext.addListener(new ContextLoaderListener(rootContext));
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("mainServlet", new DispatcherServlet(rootContext));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/main");
+    public void onStartup(ServletContext servletContext) {
+        /*
+            Создание главного контекста сервлетов.
+         */
+        AnnotationConfigWebApplicationContext mainContext = new AnnotationConfigWebApplicationContext();
+
+        /*
+            Регистрация конфигурации Spring 5 на основе java-класса.
+         */
+        mainContext.register(SpringMainConfiguration.class);
+
+        /*
+            Добавление слушателя в контекст.
+         */
+        servletContext.addListener(new ContextLoaderListener(mainContext));
+
+        /*
+            Переключение на контекст нового сервлета
+         */
+        mainContext.setServletContext(servletContext);
+
+        ServletRegistration.Dynamic servlet = servletContext.addServlet("mainServlet", new DispatcherServlet(mainContext));
+
+        /*
+            Указание адресного пространства, прослушиваемого сервлетом.
+         */
+        servlet.addMapping("/mainApp/*");
+
+        /*
+            Приоритет загрузки сервлета.
+         */
+        servlet.setLoadOnStartup(1);
     }
 }

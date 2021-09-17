@@ -1,8 +1,3 @@
-Global database name=DictionaryDB
-Pluggable database name=DictionaryPDB
-Administrative password=DictionaryDBPassword1
-Oracle home user password=
-
-dbname=
+dbname=dictionarydb
 user=dictionarydbmain
 password=dictionarymainpassword

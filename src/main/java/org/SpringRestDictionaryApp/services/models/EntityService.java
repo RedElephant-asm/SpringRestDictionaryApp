@@ -1,13 +1,9 @@
-package org.SpringRestDictionaryApp.services.types;
+package org.SpringRestDictionaryApp.services.models;
 
-import org.SpringRestDictionaryApp.ORM.entities.Dictionary;
 import org.SpringRestDictionaryApp.ORM.models.MainModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 public abstract class EntityService<Entity extends MainModel, EntityRepository extends JpaRepository<Entity, Integer> > {
 
